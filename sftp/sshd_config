@@ -1,0 +1,24 @@
+SyslogFacility AUTH
+LogLevel VERBOSE
+PermitRootLogin no
+StrictModes yes
+MaxAuthTries 3
+PubkeyAuthentication yes
+AuthorizedKeysFile    .ssh/authorized_keys
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+UsePAM yes
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+Subsystem sftp internal-sftp -f AUTH -l VERBOSE -u 022
+
+Match User ubuntu
+    ChrootDirectory %h/sftp
+    X11Forwarding no
+    AllowTcpForwarding no
+    AllowAgentForwarding no
+    AllowTCPForwarding no
+    PermitTTY no
+    ForceCommand internal-sftp

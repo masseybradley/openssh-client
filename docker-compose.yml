@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  nginx:
+    image: 'nginx:1.17.1'
+    container_name: 'nginx'
+    volumes:
+    - '${PWD}/nginx.conf:/etc/nginx/nginx.conf'
+    ports:
+    - '22:22'
+  sftp:
+    image: 'sftp'
+    container_name: 'sftp'
+    expose:
+    - '22'
+    volumes:
+    - 'openssh:/etc/ssh'
+    - 'data:/home/ubuntu/sftp/input'
+    - 'keys:/home/ubuntu/.ssh'
+    cap_add:
+    - 'SYS_CHROOT'
+    - 'SETGID'
+    - 'SETUID'
+    - 'CHOWN'
+volumes:
+  openssh:
+  data:
+  keys:
+networks:
+  default:
+    name: 'stage'
