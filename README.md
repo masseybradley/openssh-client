@@ -21,4 +21,6 @@ Build the `openssh-client` images:
 - `docker build --rm -f openssh-client/stretch/Dockerfile -t openssh-client:7.4p1 openssh-client/stretch/`
 - `docker build --rm -f openssh-client/buster/Dockerfile -t openssh-client:7.9p1 openssh-client/buster/`
 
+Alternatively, build the image using `make` (default target: `make build`): `make`
+
 `sftp` to the server using the client i.e.: `docker run --rm -it -v ${HOME}/.ssh:/home/ubuntu/.ssh --entrypoint sftp --network stage openssh-client:${TAG} ubuntu@sftp:/input`

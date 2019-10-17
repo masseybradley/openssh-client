@@ -1,0 +1,62 @@
+apiVersion: skaffold/v1beta13
+kind: Config
+profiles:
+- name: 5.9p1
+  build:
+    artifacts:
+    - image: openssh-client
+      context: openssh-client/12.04
+      docker:
+        cacheFrom:
+        - 'ubuntu:12.04'
+    local:
+      push: false
+      useBuildkit: true
+    tagPolicy:
+      envTemplate:
+        template: '{{.IMAGE_NAME}}:5.9p1'
+- name: 7.6p1
+  build:
+    artifacts:
+    - image: openssh-client
+      context: openssh-client/18.04
+      docker:
+        network: host
+        cacheFrom:
+        - 'ubuntu:18.04'
+    local:
+      push: false
+      useBuildkit: true
+    tagPolicy:
+      envTemplate:
+        template: '{{.IMAGE_NAME}}:7.6p1'
+- name: 7.4p1
+  build:
+    artifacts:
+    - image: openssh-client
+      context: openssh-client/stretch
+      docker:
+        network: host
+        cacheFrom:
+        - 'debian:stretch'
+    local:
+      push: false
+      useBuildkit: true
+    tagPolicy:
+      envTemplate:
+        template: '{{.IMAGE_NAME}}:7.4p1'
+- name: 7.9p1
+  build:
+    artifacts:
+    - image: openssh-client
+      context: openssh-client/buster
+      docker:
+        network: host
+        cacheFrom:
+        - 'debian:buster'
+    local:
+      push: false
+      useBuildkit: true
+    tagPolicy:
+      envTemplate:
+        template: '{{.IMAGE_NAME}}:7.9p1'
